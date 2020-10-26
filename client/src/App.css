@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+.canvas {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  cursor: crosshair;
+}
+
+.colors {
+  position: fixed;
+}
+
+.color {
+  display: inline-block;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  margin: 0.2em;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.color.black {
+  background-color: black;
+}
+.color.red {
+  background-color: red;
+}
+.color.green {
+  background-color: green;
+}
+.color.blue {
+  background-color: blue;
+}
+.color.yellow {
+  background-color: yellow;
+}
