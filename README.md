@@ -1,4 +1,4 @@
-<h2 align="center">Liveboard</h2>
+<h2 align="center">Liveboard🖥</h2>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/5bfa4345-c99d-4ded-8973-b087e1793089/deploy-status)](https://app.netlify.com/sites/liveboard/deploys) ![Version](https://img.shields.io/badge/version-1.0.1-green) ![github](https://img.shields.io/github/followers/agarwalamn?label=agarwalamn&style=social)
 
