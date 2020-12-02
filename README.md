@@ -35,6 +35,10 @@ npm run server
 #Boom✨ your project is live
 ```
 
+## Updates
+
+ - 🎊User can create custom lobby now!
+
 <div align="center">
 <img src="https://emojipedia-us.s3.amazonaws.com/content/2017/09/21/animoji-alien-emojipedia.gif" width="400"/>
   <h3>
