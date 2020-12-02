@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import io from "socket.io-client";
-import './App.css';
+import "./App.css";
 
 function App() {
+  //const ENDPOINT = "https://liveboard-backend.herokuapp.com/";
+  const ENDPOINT = "http://localhost:5000";
   const canvasRef = useRef(null);
   const colorsRef = useRef(null);
   const socketRef = useRef();
@@ -135,7 +137,16 @@ function App() {
       drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
     };
 
-    socketRef.current = io.connect("https://liveboard-backend.herokuapp.com/");
+    socketRef.current = io.connect(ENDPOINT);
+    socketRef.current.emit(
+      "join",
+      { name: "aman", room: "random" },
+      (error) => {
+        if (error) {
+          alert(error);
+        }
+      }
+    );
 
     socketRef.current.on("drawing", onDrawingEvent);
   }, []);
@@ -154,4 +165,3 @@ function App() {
 }
 
 export default App;
-
