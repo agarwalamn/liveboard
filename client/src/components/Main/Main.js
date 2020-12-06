@@ -149,6 +149,11 @@ function Main({ location }) {
 
     socketRef.current.on("drawing", onDrawingEvent);
   }, []);
+  const clearScreen = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
   return (
     <div>
       <canvas ref={canvasRef} className="canvas" />
@@ -158,6 +163,10 @@ function Main({ location }) {
         <div className="color green" />
         <div className="color blue" />
         <div className="color yellow" />
+      </div>
+
+      <div className="clear">
+        <button onClick={() => clearScreen()}>Clear</button>
       </div>
     </div>
   );
