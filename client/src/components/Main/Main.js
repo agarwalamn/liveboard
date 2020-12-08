@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 import "./Main.css";
+import GithubBtn from "../Github/GithubBtn";
 function Main({ location }) {
   const ENDPOINT = "https://liveboard-backend.herokuapp.com/";
   //const ENDPOINT = "http://localhost:5000";
@@ -156,6 +157,7 @@ function Main({ location }) {
   };
   return (
     <div>
+      <GithubBtn />
       <canvas ref={canvasRef} className="canvas" />
       <div ref={colorsRef} className="colors">
         <div className="color black" />

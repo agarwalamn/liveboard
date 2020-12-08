@@ -17,13 +17,31 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   background-color: #1a1a1d;
+  flex-wrap: wrap;
+}
+#orDivider {
+  color: white;
+  font-size: 2em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#orDivider::before,
+#orDivider::after {
+  content: "";
+  border-top: 4px solid white;
+  height: 0px;
+  width: 25%;
+  display: block;
 }
 
 .joinInnerContainer {
   width: 20%;
+  flex: content;
+  margin: 2rem;
 }
 
 .joinInput {
@@ -73,4 +91,9 @@ button:focus {
 .or {
   color: white;
   margin: 1rem;
+}
+
+.headingContainer {
+  flex-shrink: 0;
+  width: 100%;
 }

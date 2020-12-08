@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import GithubBtn from "../Github/GithubBtn";
 import "./Join.css";
 function Join() {
   const [name, setName] = useState();
@@ -7,6 +8,7 @@ function Join() {
 
   return (
     <div className="joinOuterContainer">
+      <GithubBtn />
       <div className="joinInnerContainer">
         <div className="heading">Create/Join</div>
         <form className="joinForm mt-20">
@@ -41,8 +43,12 @@ function Join() {
             </button>
           </Link>
         </form>
-        <div className="or">Or</div>
-        <div className="heading mt-20">Join Global</div>
+      </div>
+      <div className="joinInnerContainer" id="orDivider">
+        OR
+      </div>
+      <div className="joinInnerContainer">
+        <div className="heading">Join Global</div>
         <form className="joinForm mt-20">
           <input
             type="text"
