@@ -9,7 +9,7 @@
 </div>
 <div align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/agarwalamn/liveboard/main/assets/demo.jpg" alt="Screenshot1" width="100%">
+  <img src="https://raw.githubusercontent.com/agarwalamn/liveboard/main/assets/demo.png" alt="Screenshot1" width="100%">
   <br>
 </div>
 
@@ -37,7 +37,7 @@ npm run server
 
 ## Updates
 
- - 🎊User can create custom lobby now!
+- 🎊User can create custom lobby now!
 
 <div align="center">
 <img src="https://emojipedia-us.s3.amazonaws.com/content/2017/09/21/animoji-alien-emojipedia.gif" width="400"/>
