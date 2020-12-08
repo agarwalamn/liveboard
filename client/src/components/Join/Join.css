@@ -19,11 +19,11 @@ body {
   text-align: center;
   height: 100%;
   align-items: center;
-  background-color: #1a1a1d;
+  background-color: #14213d;
   flex-wrap: wrap;
 }
 #orDivider {
-  color: white;
+  color: #fca311;
   font-size: 2em;
   display: flex;
   justify-content: space-evenly;
@@ -45,9 +45,10 @@ body {
 }
 
 .joinInput {
-  border-radius: 0;
+  border-radius: 10px;
   padding: 15px 20px;
   width: 100%;
+  border: none;
 }
 
 .heading {
@@ -61,9 +62,9 @@ body {
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979ff;
+  background: #fca311;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   display: inline-block;
   border: none;
   width: 100%;

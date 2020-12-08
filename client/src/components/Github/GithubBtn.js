@@ -15,7 +15,7 @@ function GithubBtn() {
           height="80"
           viewBox="0 0 250 250"
           style={{
-            fill: "#2979ff",
+            fill: "#fca311",
             color: "#fff",
             position: "fixed",
             top: 0,
