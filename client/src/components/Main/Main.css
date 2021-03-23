@@ -11,6 +11,17 @@
   bottom: 0;
   top: 0;
   cursor: crosshair;
+  background-color: transparent;
+  z-index: 1;
+}
+.canvas_new {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
 }
 
 .colors {
