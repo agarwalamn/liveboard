@@ -3,9 +3,9 @@ import queryString from 'query-string';
 import io from 'socket.io-client';
 import './Main.css';
 import GithubBtn from '../Github/GithubBtn';
+
 function Main({ location }) {
-  //const ENDPOINT = "https://liveboard-backend.herokuapp.com/";
-  const ENDPOINT = 'http://localhost:5000';
+  const ENDPOINT = process.env.ENDPOINT;
   const canvasRef = useRef(null);
   const nameCanvasRef = useRef(null);
   const colorsRef = useRef(null);
