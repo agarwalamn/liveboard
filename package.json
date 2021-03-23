@@ -8,7 +8,10 @@
     "install-server": "npm install --prefix server",
     "server": "npm run server --prefix server",
     "client": "npm start --prefix client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
