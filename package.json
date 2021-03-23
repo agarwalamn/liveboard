@@ -6,8 +6,8 @@
   "scripts": {
     "install-client": "npm install --prefix client",
     "install-server": "npm install --prefix server",
-    "server":"npm run server --prefix server",
-    "client":"npm start --prefix client",
+    "server": "npm run server --prefix server",
+    "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/agarwalamn/liveboard/issues"
   },
-  "homepage": "https://github.com/agarwalamn/liveboard#readme"
+  "homepage": "https://github.com/agarwalamn/liveboard#readme",
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
 }
