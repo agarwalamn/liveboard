@@ -17,7 +17,7 @@ function Main({ location }) {
     socketRef.current = io.connect(ENDPOINT);
     socketRef.current.emit('join', { name, room }, (error) => {
       if (error) {
-        //alert(error);
+        alert('We are facing technical difficulties try again later');
       }
     });
   }, [ENDPOINT, location.search]);
