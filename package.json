@@ -1,0 +1,38 @@
+{
+  "name": "liveboard",
+  "version": "1.0.1",
+  "description": "Liveboard, share live window",
+  "main": " ",
+  "scripts": {
+    "install-client": "npm install --prefix client",
+    "install-server": "npm install --prefix server",
+    "server": "npm run server --prefix server",
+    "client": "npm start --prefix client",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agarwalamn/liveboard.git"
+  },
+  "keywords": [
+    "socket.io",
+    "node",
+    "express",
+    "livesharing",
+    "canvas",
+    "html",
+    "reactjs"
+  ],
+  "author": "agarwalamn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agarwalamn/liveboard/issues"
+  },
+  "homepage": "https://github.com/agarwalamn/liveboard#readme",
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  }
+}

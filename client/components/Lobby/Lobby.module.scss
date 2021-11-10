@@ -1,0 +1,48 @@
+$background-color: #14213d;
+
+.wrapper {
+  align-items: center;
+  background-color: $background-color;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.lobbyCard {
+  background-color: cyan;
+  border-radius: 12px;
+  min-height: 250px;
+  min-width: 250px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createCard {
+  left: -10%;
+  top: -10%;
+  z-index: 2;
+}
+
+.globalCard {
+  bottom: -10%;
+  right: -10%;
+  z-index: 2;
+}
+
+.infoCard {
+  background-color: white;
+  border-radius: 16px;
+  margin: auto;
+  min-height: 400px;
+  min-width: 50%;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
