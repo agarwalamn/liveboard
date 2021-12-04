@@ -1,8 +1,9 @@
 import type { NextPage } from 'next';
-import Lobby from '../components/Lobby';
+
+import { Hero } from 'components/Hero';
 
 const Home: NextPage = () => {
-  return <Lobby />;
+  return <Hero />;
 };
 
 export default Home;
