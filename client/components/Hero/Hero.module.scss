@@ -1,0 +1,62 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.heroContainer {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.heroLogo {
+  position: absolute;
+  color: $primary-foreground-color;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 36px;
+  text-align: center;
+  width: 100%;
+  mix-blend-mode: difference;
+}
+
+.optionContainer {
+  display: flex;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  @include for-phone-only {
+    flex-direction: column;
+  }
+}
+
+.option {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 46px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 1s;
+  width: 100%;
+  white-space: 'pre-wrap';
+
+  &:hover {
+    flex: 2;
+  }
+
+  @include for-phone-only {
+    font-size: 24px;
+  }
+}
+
+.optionPrimary {
+  background-color: $primary-background-color;
+  color: $primary-foreground-color;
+}
+
+.optionSecondary {
+  background-color: $primary-foreground-color;
+  color: $primary-background-color;
+}
