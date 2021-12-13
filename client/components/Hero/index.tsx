@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
 
 import {
@@ -8,12 +8,13 @@ import {
 } from 'utils/Strings';
 import styles from './Hero.module.scss';
 import { useRouter } from 'next/dist/client/router';
+import { HeroOption } from 'utils/Interface';
 
 export const Hero = () => {
   const router = useRouter();
 
-  const handleOptionClick = (url: string) => {
-    router.push(url);
+  const handleOptionClick = (option: HeroOption) => {
+    router.push(`/join/${option}`);
   };
 
   return (
@@ -22,7 +23,7 @@ export const Hero = () => {
         <div className={styles.heroLogo}>{LIVEBOARD}</div>
         <div
           className={cn(styles.option, styles.optionPrimary)}
-          onClick={() => handleOptionClick('/join')}
+          onClick={() => handleOptionClick(HeroOption.Custom)}
           tabIndex={0}
           role="button"
         >
@@ -30,7 +31,7 @@ export const Hero = () => {
         </div>
         <div
           className={cn(styles.option, styles.optionSecondary)}
-          onClick={() => handleOptionClick('/global')}
+          onClick={() => handleOptionClick(HeroOption.Global)}
           tabIndex={0}
           role="button"
         >
