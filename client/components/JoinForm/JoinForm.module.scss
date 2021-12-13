@@ -1,0 +1,93 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+@mixin customColorScheme {
+  background-color: $primary-background-color;
+  color: $primary-foreground-color;
+}
+
+@mixin globalColorScheme {
+  background-color: $primary-foreground-color;
+  color: $primary-background-color;
+}
+
+.formContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: 36px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.custom {
+  @include customColorScheme;
+}
+
+.global {
+  @include globalColorScheme;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.inputContainer {
+  & > label {
+    display: block;
+  }
+
+  & > input {
+    margin: 12px 0;
+    padding: 6px;
+    font-size: 24px;
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    outline: none;
+
+    &:focus {
+      border-bottom-width: 3px;
+    }
+  }
+}
+
+.customInput {
+  @include customColorScheme;
+  border-bottom: 2px solid $primary-foreground-color;
+  transition: all 1s;
+}
+
+.globalinput {
+  @include globalColorScheme;
+  color: $primary-background-color;
+  border-bottom: 2px solid $primary-background-color;
+}
+
+.continueBtn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 20px;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.customBtn {
+  @include globalColorScheme;
+}
+
+.globalBtn {
+  @include customColorScheme;
+}
