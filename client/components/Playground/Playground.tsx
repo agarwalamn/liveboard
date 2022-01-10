@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
+
+import Canvas from './Canvas/Canvas';
 import { Header } from './Header/Header';
 
+import styles from './Playground.module.scss';
+
 export const Playground = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div>
+    <div className={styles.playground} ref={containerRef}>
       <Header />
-      Playground
+      <Canvas name={'test'} room="test" color="#fff" stroke={1} />
     </div>
   );
 };
