@@ -34,5 +34,8 @@
   "homepage": "https://github.com/agarwalamn/liveboard#readme",
   "devDependencies": {
     "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "socket.io": "^4.4.1"
   }
 }
