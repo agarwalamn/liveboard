@@ -11,6 +11,9 @@
   justify-content: space-between;
   padding: 1.25rem;
   text-transform: uppercase;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
 }
 
 .toolsContainer {

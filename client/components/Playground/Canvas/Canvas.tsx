@@ -1,3 +1,4 @@
+import { useToolSettings } from 'hooks/context/useToolsSettings';
 import React, { useEffect, useRef, MutableRefObject } from 'react';
 import io, { Socket } from 'socket.io-client';
 
@@ -11,19 +12,19 @@ interface SocketPayload {
   color: string;
   name: string;
   emit?: boolean;
+  stroke: number;
 }
 
 interface CanvasProps {
   name: string;
   room: string;
-  color: string;
-  stroke: number;
 }
 
-const Canvas = ({ name, room, color, stroke }: CanvasProps) => {
+const Canvas = ({ name, room }: CanvasProps) => {
   const ENDPOINT = 'http://localhost:5000';
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let socketRef = useRef<any>();
+  const { color, stroke } = useToolSettings();
 
   const handleErrors = (msg: string) => {
     console.log(msg);
@@ -52,31 +53,39 @@ const Canvas = ({ name, room, color, stroke }: CanvasProps) => {
 
     if (!context) return;
 
-    const colors = document.getElementsByClassName('color'); //all colors
-
-    const current: any = {
-      color: 'black',
-    }; // default black
-
-    // helper that will update the current color
-    const onColorUpdate = (e: any) => {
-      current.color = e.target.className.split(' ')[1];
+    const onResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
 
-    // loop through the color elements and add the click event listeners
+    window.addEventListener('resize', onResize, false);
+    onResize();
+  }, []);
 
-    for (let i = 0; i < colors.length; i++) {
-      colors[i].addEventListener('click', onColorUpdate, false);
-    }
+  useEffect(() => {
+    const canvas = canvasRef.current; // getting the data of the canvas
+    if (!canvas) return;
+    const context = canvas.getContext('2d'); // geting 2d of the canvas
+    if (!context) return;
+
+    const current: any = {};
     let drawing = false;
 
-    //drawing the line
-    const drawLine = ({ x0, y0, x1, y1, color, name, emit }: SocketPayload) => {
+    const drawLine = ({
+      x0,
+      y0,
+      x1,
+      y1,
+      color,
+      name,
+      emit,
+      stroke,
+    }: SocketPayload) => {
       context.beginPath();
       context.moveTo(x0, y0);
       context.lineTo(x1, y1);
       context.strokeStyle = color;
-      context.lineWidth = 3;
+      context.lineWidth = stroke;
       context.stroke();
       context.closePath();
 
@@ -94,6 +103,7 @@ const Canvas = ({ name, room, color, stroke }: CanvasProps) => {
         y1: y1 / h,
         color,
         name,
+        stroke,
       });
     };
     // geeting mouse and touch actions
@@ -113,8 +123,9 @@ const Canvas = ({ name, room, color, stroke }: CanvasProps) => {
         y0: current.y, //Starting Y
         x1: e.clientX || e.touches[0].clientX, //Current X
         y1: e.clientY || e.touches[0].clientY, //Current Y
-        color: current.color, //Color Chosen
+        color,
         name,
+        stroke,
         emit: true,
       });
       current.x = e.clientX || e.touches[0].clientX;
@@ -132,7 +143,8 @@ const Canvas = ({ name, room, color, stroke }: CanvasProps) => {
         y0: current.y,
         x1: e.clientX || e.touches[0].clientX,
         y1: e.clientY || e.touches[0].clientY,
-        color: current.color,
+        color: color,
+        stroke,
         name,
         emit: true,
       });
@@ -163,15 +175,6 @@ const Canvas = ({ name, room, color, stroke }: CanvasProps) => {
     canvas.addEventListener('touchcancel', onMouseUp, false);
     canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
 
-    const onResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', onResize, false);
-    onResize();
-
-    // socket.io
     const onDrawingEvent = (data: any) => {
       const w = canvas.width;
       const h = canvas.height;
@@ -181,12 +184,14 @@ const Canvas = ({ name, room, color, stroke }: CanvasProps) => {
         x1: data.x1 * w,
         y1: data.y1 * h,
         color: data.color,
+        stroke: data.stroke,
         name: data.name,
       });
     };
 
     socketRef.current.on('drawing', onDrawingEvent);
-  }, []);
+  }, [color, name, stroke]);
+
   const clearScreen = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useToolSettings } from 'hooks/context/useToolsSettings';
+import React, { useContext, useState } from 'react';
 
 import styles from './Header.module.scss';
 
@@ -9,7 +10,7 @@ const availableStrokeOptions = [1, 2, 3, 4, 5, 6];
  * @returns react component with tools
  */
 export const Tools = () => {
-  const [strokeColor, setStrokeColor] = useState('#fca311');
+  const { color, updateColor, stroke, updateStroke } = useToolSettings();
 
   return (
     <div className={styles.toolsContainer}>
@@ -18,16 +19,19 @@ export const Tools = () => {
           className={styles.colorPickerInput}
           type="color"
           name="color_picker"
-          value={strokeColor}
-          onChange={(e) => setStrokeColor(e.target.value)}
+          value={color}
+          onChange={(e) => updateColor(e.target.value)}
         />
-        <div className={styles.colorCode}>{strokeColor}</div>
+        <div className={styles.colorCode}>{color}</div>
       </div>
       <div className={styles.strokePicker}>
-        <select>
-          {availableStrokeOptions.map((stroke) => (
-            <option value={stroke} key={stroke}>
-              {stroke}
+        <select
+          value={stroke}
+          onChange={(e) => updateStroke(parseInt(e.target.value))}
+        >
+          {availableStrokeOptions.map((avaStroke) => (
+            <option value={avaStroke} key={avaStroke}>
+              {avaStroke}
             </option>
           ))}
         </select>
