@@ -78,13 +78,6 @@
       }
     }
   }
-
-  .clearScreen {
-    font-size: 1.25rem;
-    font-weight: bold;
-    padding: 0 1rem;
-    text-transform: uppercase;
-  }
 }
 
 .stroke {
@@ -131,4 +124,15 @@
 .githubLogo {
   cursor: pointer;
   margin-left: 32px;
+}
+
+.roomInfo {
+  button {
+    background: none;
+    border: none;
+  }
+
+  svg {
+    fill: $primary-foreground-color;
+  }
 }

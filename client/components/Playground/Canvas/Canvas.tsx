@@ -1,6 +1,8 @@
 import { useToolSettings } from 'hooks/context/useToolsSettings';
 import React, { useEffect, useRef, MutableRefObject } from 'react';
+import { toast } from 'react-toastify';
 import io, { Socket } from 'socket.io-client';
+import { Users } from '../Playground';
 
 import styles from './Canvas.module.scss';
 
@@ -18,9 +20,10 @@ interface SocketPayload {
 interface CanvasProps {
   name: string;
   room: string;
+  updateUserInCurrentRoom: (_: Users[]) => void;
 }
 
-const Canvas = ({ name, room }: CanvasProps) => {
+const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
   const ENDPOINT = 'http://localhost:5000';
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let socketRef = useRef<any>();
@@ -29,7 +32,7 @@ const Canvas = ({ name, room }: CanvasProps) => {
   const handleErrors = (msg: string) => {
     console.log(msg);
   };
-  console.log(socketRef.current);
+
   //useRef is used to get the values of the dom element
   useEffect(() => {
     socketRef.current = io(ENDPOINT, { transports: ['websocket'] }) as Socket;
@@ -39,15 +42,13 @@ const Canvas = ({ name, room }: CanvasProps) => {
       console.log(`connect_error due to ${err}`);
     });
 
-    socketRef.current.emit('join', { name, room }, (error: Error) => {
-      if (error)
-        handleErrors('We are facing technical difficulties try again later');
+    socketRef.current.emit('join', { name, room }, (error: string) => {
+      if (error) handleErrors(error);
     });
   }, [ENDPOINT, name, room]);
 
   useEffect(() => {
     const canvas = canvasRef.current; // getting the data of the canvas
-    //const test = colorsRef.current; // getting colors values
     if (!canvas) return;
     const context = canvas.getContext('2d'); // geting 2d of the canvas
 
@@ -192,13 +193,18 @@ const Canvas = ({ name, room }: CanvasProps) => {
     socketRef.current.on('drawing', onDrawingEvent);
   }, [color, name, stroke]);
 
-  const clearScreen = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const context = canvas.getContext('2d');
-    if (!context) return;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  };
+  useEffect(() => {
+    const showJoinNotification = ({ message }: { message: string }) => {
+      console.log('showJoinNotification called ====>');
+      toast(message);
+    };
+    socketRef.current.on('notification', showJoinNotification);
+  }, [socketRef]);
+
+  useEffect(() => {
+    socketRef.current.on('users', updateUserInCurrentRoom);
+  }, [updateUserInCurrentRoom]);
+
   return (
     <div className={styles.canvasContainer}>
       <canvas ref={canvasRef} className="canvas" />
