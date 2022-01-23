@@ -1,5 +1,5 @@
 import { useToolSettings } from 'hooks/context/useToolsSettings';
-import React, { useContext, useState } from 'react';
+import React, { RefObject, useContext, useState } from 'react';
 
 import styles from './Header.module.scss';
 
@@ -36,7 +36,6 @@ export const Tools = () => {
           ))}
         </select>
       </div>
-      <div className={styles.clearScreen}>Clear</div>
     </div>
   );
 };

@@ -6,7 +6,12 @@ const { Server } = require('socket.io');
 const http = require('http');
 app.use(cors());
 const server = http.createServer(app);
-const { addUser, getUser } = require('./utils/users');
+const {
+  addUser,
+  getUser,
+  removeUser,
+  getUsersInRoom,
+} = require('./utils/users');
 
 // const io = socket(server);
 const io = new Server(server, {
@@ -19,13 +24,14 @@ const io = new Server(server, {
 const connectionHandler = (socket) => {
   socket.on('join', ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
-    console.log(user);
     if (error) return callback(error);
 
     socket.join(user.room);
-    socket.broadcast
-      .to(user.room)
-      .emit('notification', { message: `${user.name} joined the party` });
+    socket.broadcast.to(user.room).emit('notification', {
+      message: `👽 ${user.name} hooped in the server`,
+    });
+    const users = getUsersInRoom(user.room);
+    io.to(user.room).emit('users', users);
     callback();
   });
 
@@ -34,6 +40,20 @@ const connectionHandler = (socket) => {
     if (!user) return; //needs to be fixed
     io.to(user.room).emit('drawing', data); //Broadcast Drawing to other clients
     console.log('emmiting', user.room);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnect');
+    const user = getUser(socket.id);
+    console.log(user);
+    removeUser(socket.id);
+    if (user) {
+      socket.broadcast.to(user.room).emit('notification', {
+        message: `👽 ${user.name} left the server`,
+      });
+      const users = getUsersInRoom(user.room);
+      io.to(user.room).emit('users', users);
+    }
   });
 };
 //IO
