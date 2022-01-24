@@ -24,7 +24,10 @@ interface CanvasProps {
 }
 
 const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
-  const ENDPOINT = 'http://localhost:5000';
+  const ENDPOINT =
+    process.env.NEXT_PUBLIC_LIVEBOARD_BACKEND_URL || 'http://localhost:5000';
+
+  console.log(ENDPOINT);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let socketRef = useRef<any>();
   const { color, stroke } = useToolSettings();
