@@ -38,6 +38,7 @@ export const Playground = ({}) => {
         <Canvas
           name={username as string}
           room={roomId as string}
+          usersInRoom={usersInRoom}
           updateUserInCurrentRoom={updateUserInCurrentRoom}
         />
       </div>
