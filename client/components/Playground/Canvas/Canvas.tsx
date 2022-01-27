@@ -1,10 +1,12 @@
-import { useToolSettings } from 'hooks/context/useToolsSettings';
-import React, { useEffect, useRef, MutableRefObject } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import io, { Socket } from 'socket.io-client';
+
 import { Users } from '../Playground';
+import { useToolSettings } from 'hooks/context/useToolsSettings';
 
 import styles from './Canvas.module.scss';
+import CursorIcon from 'assets/cursor.svg';
 
 interface SocketPayload {
   x0: number;
@@ -20,15 +22,24 @@ interface SocketPayload {
 interface CanvasProps {
   name: string;
   room: string;
+  usersInRoom: Users[];
   updateUserInCurrentRoom: (_: Users[]) => void;
 }
 
-const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
+const Canvas = ({
+  name,
+  room,
+  usersInRoom,
+  updateUserInCurrentRoom,
+}: CanvasProps) => {
   const ENDPOINT =
     process.env.NEXT_PUBLIC_LIVEBOARD_BACKEND_URL || 'http://localhost:5000';
 
-  console.log(ENDPOINT);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pointerContainerRef = useRef(null);
+  const [userPointerCordinates, setUserPointerCordinates] =
+    useState<Record<string, { x: number; y: number }>>();
+
   let socketRef = useRef<any>();
   const { color, stroke } = useToolSettings();
 
@@ -36,10 +47,19 @@ const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
     console.log(msg);
   };
 
+  const moveCursor = (name: string, x: number, y: number) => {
+    setUserPointerCordinates({
+      ...userPointerCordinates,
+      [name]: {
+        x,
+        y,
+      },
+    });
+  };
+
   //useRef is used to get the values of the dom element
   useEffect(() => {
     socketRef.current = io(ENDPOINT, { transports: ['websocket'] }) as Socket;
-    console.log(socketRef.current);
 
     socketRef.current.on('connect_error', (err: any) => {
       console.log(`connect_error due to ${err}`);
@@ -110,15 +130,25 @@ const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
         stroke,
       });
     };
+
+    const onMovePointerEvent = (name: string, x: number, y: number) => {
+      moveCursor(name, x, y);
+      socketRef.current.emit('sharecursor', {
+        name,
+        x,
+        y,
+      });
+    };
+
     // geeting mouse and touch actions
     const onMouseDown = (e: any) => {
-      console.log('dar');
       drawing = true;
       current.x = e.clientX || e.touches[0].clientX; //Set Starting X
       current.y = e.clientY || e.touches[0].clientY; //Set Starting Y
     };
 
     const onMouseMove = (e: any) => {
+      onMovePointerEvent(name, e.clientX, e.clientY);
       if (!drawing) {
         return;
       }
@@ -155,7 +185,6 @@ const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
     };
 
     //To throttle the number of event calls..
-
     const throttle = (callback: any, delay: number) => {
       let previousCall = new Date().getTime();
       return function () {
@@ -198,9 +227,12 @@ const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
 
   useEffect(() => {
     const showJoinNotification = ({ message }: { message: string }) => {
-      console.log('showJoinNotification called ====>');
       toast(message);
     };
+
+    socketRef.current.on('sharecursor', ({ name, x, y }: any) =>
+      moveCursor(name, x, y),
+    );
     socketRef.current.on('notification', showJoinNotification);
   }, [socketRef]);
 
@@ -211,6 +243,33 @@ const Canvas = ({ name, room, updateUserInCurrentRoom }: CanvasProps) => {
   return (
     <div className={styles.canvasContainer}>
       <canvas ref={canvasRef} className="canvas" />
+      <div className={styles.pointerContainer}>
+        {usersInRoom.map((user) => (
+          <div
+            key={user.id}
+            className={styles.pointer}
+            style={
+              user.name !== name
+                ? {
+                    top: `${
+                      userPointerCordinates
+                        ? userPointerCordinates[user.name]?.y
+                        : 0
+                    }px`,
+                    left: `${
+                      userPointerCordinates
+                        ? userPointerCordinates[user.name]?.x
+                        : 0
+                    }px`,
+                  }
+                : { display: 'none' }
+            }
+          >
+            <CursorIcon />
+            <div>{user.name}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

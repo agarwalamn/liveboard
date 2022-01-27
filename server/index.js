@@ -44,6 +44,13 @@ const connectionHandler = (socket) => {
     console.log('emmiting', user.room);
   });
 
+  socket.on('sharecursor', (data) => {
+    const user = getUser(socket.id);
+    if (!user) return; //needs to be fixed
+    io.to(user.room).emit('sharecursor', data); //Broadcast Drawing to other clients
+    console.log('sharecursor', user.room, user);
+  });
+
   socket.on('disconnect', () => {
     console.log('disconnect');
     const user = getUser(socket.id);
