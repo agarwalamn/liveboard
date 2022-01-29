@@ -27,7 +27,7 @@ export const Hero = () => {
           tabIndex={0}
           role="button"
         >
-          <pre>{CREATE_AND_JOIN_TEXT}</pre>
+          <div className={styles.label}>{CREATE_AND_JOIN_TEXT}</div>
         </div>
         <div
           className={cn(styles.option, styles.optionSecondary)}
@@ -35,7 +35,10 @@ export const Hero = () => {
           tabIndex={0}
           role="button"
         >
-          <pre>{GLOBAL_JOIN_TEXT}</pre>
+          <div className={styles.label}>{GLOBAL_JOIN_TEXT}</div>
+        </div>
+        <div className={styles.footer}>
+          Hint: Your can click on either side to continue
         </div>
       </div>
     </div>
