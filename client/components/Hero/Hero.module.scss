@@ -2,28 +2,28 @@
 @import '../../styles/mixins';
 
 .heroContainer {
-  min-width: 100vw;
   min-height: 100vh;
+  min-width: 100vw;
 }
 
 .heroLogo {
-  position: absolute;
   color: $primary-foreground-color;
-  z-index: 1;
-  font-weight: bold;
   font-size: 36px;
+  font-weight: bold;
+  mix-blend-mode: difference;
+  position: absolute;
   text-align: center;
   width: 100%;
-  mix-blend-mode: difference;
+  z-index: 1;
 }
 
 .optionContainer {
   display: flex;
+  left: 0;
   min-height: 100%;
   min-width: 100%;
   position: absolute;
   top: 0;
-  left: 0;
 
   @include for-phone-only {
     flex-direction: column;
@@ -31,16 +31,16 @@
 }
 
 .option {
-  flex: 1;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 46px;
-  text-align: center;
   cursor: pointer;
+  display: flex;
+  flex: 1;
+  font-size: 46px;
+  justify-content: center;
+  text-align: center;
   transition: all 1s;
-  width: 100%;
   white-space: 'pre-wrap';
+  width: 100%;
 
   &:hover {
     flex: 2;
@@ -59,4 +59,27 @@
 .optionSecondary {
   background-color: $primary-foreground-color;
   color: $primary-background-color;
+}
+
+.label {
+  font-weight: bold;
+  transition: 0.2s all;
+  width: 200px;
+
+  &:hover {
+    transform: scale(1.5);
+  }
+}
+
+.footer {
+  bottom: 0;
+  color: $primary-foreground-color;
+  font-size: 16px;
+  font-weight: bold;
+  mix-blend-mode: difference;
+  padding: 15px 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
 }
