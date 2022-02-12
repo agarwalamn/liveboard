@@ -77,6 +77,11 @@ const server = () => {
 
   io.on('connection', connectionHandler);
 
+  // for deployment testing
+  app.get('/', function (_, res) {
+    res.send('You are not expected to be here');
+  });
+
   // start server
   server.listen(process.env.PORT || 4000, () =>
     console.log(`server is running on port ${process.env.PORT || 4000}`),
