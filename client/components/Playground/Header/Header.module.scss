@@ -18,7 +18,11 @@
 
 .toolsContainer {
   align-items: center;
-  display: flex;
+  display: none;
+
+  @include for-tablet-landscape-up {
+    display: flex;
+  }
 
   > div:not(:last-child) {
     border-right: 3px solid $primary-foreground-color;
@@ -113,20 +117,14 @@
   }
 }
 
-.redBadge {
-  background-color: #fc112d;
-}
-
-.greenBadge {
-  background-color: #11fc1a;
-}
-
 .githubLogo {
   cursor: pointer;
   margin-left: 32px;
 }
 
 .roomInfo {
+  flex: 1;
+  text-align: center;
   button {
     background: none;
     border: none;

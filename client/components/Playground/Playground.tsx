@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import ToolSettingsProvider from 'hooks/context/useToolsSettings';
 import Canvas from './Canvas/Canvas';
 import { Header } from './Header/Header';
-
 import styles from './Playground.module.scss';
 
 export interface Users {
@@ -14,22 +13,25 @@ export interface Users {
 }
 
 export const Playground = ({}) => {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const [usersInRoom, setUsersInRoom] = useState<Users[]>([]);
+
+  const {
+    query: { roomId, username },
+  } = router;
 
   const updateUserInCurrentRoom = (data: Users[]) => {
     setUsersInRoom(data);
   };
-  const router = useRouter();
-  const {
-    query: { roomId, username },
-  } = router;
 
   if (router.isFallback) {
     return <div>We are loading page for you</div>;
   }
 
-  if (!roomId && !username) return <></>;
+  if (!roomId && !username) {
+    router.back();
+  }
 
   return (
     <ToolSettingsProvider>

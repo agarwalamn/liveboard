@@ -42,8 +42,13 @@
   white-space: 'pre-wrap';
   width: 100%;
 
-  &:hover {
+  &:hover,
+  &:focus {
     flex: 2;
+
+    .label {
+      transform: scale(1.5);
+    }
   }
 
   @include for-phone-only {
@@ -65,10 +70,6 @@
   font-weight: bold;
   transition: 0.2s all;
   width: 200px;
-
-  &:hover {
-    transform: scale(1.5);
-  }
 }
 
 .footer {

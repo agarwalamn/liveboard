@@ -15,15 +15,16 @@ interface HeaderProps {
 
 export const Header = ({ roomName, usersInRoom }: HeaderProps) => {
   const copyToClipBoard = () => {
-    // todo: use ENV
-    navigator.clipboard.writeText('http://localhost:3000/join/roomName');
+    navigator.clipboard.writeText(
+      `${process.env.NEXT_PUBLIC_LIVEBOARD_FRONTEND_URL}/join/custom?inviteRoomCode=${roomName}`,
+    );
     toast('🔗 Link copied to  your clipboard !');
   };
   return (
     <div className={styles.header}>
       <Tools />
       <div className={styles.roomInfo}>
-        <span>{roomName}</span>{' '}
+        <span>{roomName}</span>
         <button onClick={copyToClipBoard}>
           <CopyIcon />
         </button>
