@@ -1,3 +1,4 @@
-export const CREATE_AND_JOIN_TEXT = 'CREATE\nOR\nJOIN\nROOM';
-export const GLOBAL_JOIN_TEXT = 'JOIN\nGLOBAL\nROOM';
+export const CREATE_AND_JOIN_TEXT = 'CREATE OR JOIN ROOM';
+export const GLOBAL_JOIN_TEXT = 'JOIN GLOBAL ROOM';
 export const LIVEBOARD = 'LIVEBOARD';
+export const HINT_MESSAGE = 'Hint: Your can click on either side to continue';

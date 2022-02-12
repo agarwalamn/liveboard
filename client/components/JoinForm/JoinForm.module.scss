@@ -12,16 +12,19 @@
 }
 
 .formContainer {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  font-weight: bold;
+  height: 100vh;
+  text-align: center;
+  width: 100vw;
 }
 
 .heading {
   font-size: 36px;
-  text-align: center;
+  font-weight: 700;
   padding: 10px 0;
+  text-align: center;
 }
 
 .custom {
@@ -33,11 +36,11 @@
 }
 
 .form {
+  align-items: center;
   display: flex;
   flex-direction: column;
+  flex: 2;
   justify-content: center;
-  align-items: center;
-  flex: 1;
 }
 
 .inputContainer {
@@ -46,18 +49,25 @@
   }
 
   & > input {
-    margin: 12px 0;
-    padding: 6px;
-    font-size: 24px;
     background-color: transparent;
-    border-top: none;
     border-left: none;
     border-right: none;
-
+    border-top: none;
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 32px 0;
     outline: none;
+    padding: 6px;
+    transition: all 0.5s;
 
     &:focus {
-      border-bottom-width: 3px;
+      border-bottom-width: 5px;
+      transform: scale(1.5);
+    }
+
+    &:disabled {
+      opacity: 0.5;
     }
   }
 }
@@ -66,22 +76,33 @@
   @include customColorScheme;
   border-bottom: 2px solid $primary-foreground-color;
   transition: all 1s;
+
+  &::placeholder {
+    color: $primary-foreground-color;
+    font-weight: bold;
+  }
 }
 
 .globalinput {
   @include globalColorScheme;
-  color: $primary-background-color;
   border-bottom: 2px solid $primary-background-color;
+  color: $primary-background-color;
+
+  &::placeholder {
+    color: $primary-background-color;
+    font-weight: bold;
+  }
 }
 
 .continueBtn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  font-size: 20px;
-  border: none;
-  font-weight: bold;
   border-radius: 5px;
+  border: none;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 50px 0;
+  padding: 12px;
+  width: 100%;
 }
 
 .customBtn {

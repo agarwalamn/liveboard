@@ -2,10 +2,11 @@ const users = [];
 
 const addUser = ({ id, name, room }) => {
   if (!name || !room) return { error: 'Username and room are required.' };
-  if (getuserInRoom(name, room)) return { error: 'Username is taken.' };
 
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
+
+  if (getuserInRoom(name, room)) return { error: 'Username is taken.' };
 
   const user = { id, name, room };
 

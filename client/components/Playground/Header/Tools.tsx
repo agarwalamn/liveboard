@@ -1,7 +1,7 @@
-import { useToolSettings } from 'hooks/context/useToolsSettings';
-import React, { RefObject, useContext, useState } from 'react';
+import React from 'react';
 
 import styles from './Header.module.scss';
+import { useToolSettings } from 'hooks/context/useToolsSettings';
 
 const availableStrokeOptions = [1, 2, 3, 4, 5, 6];
 

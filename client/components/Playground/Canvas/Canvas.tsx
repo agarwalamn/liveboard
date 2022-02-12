@@ -32,19 +32,21 @@ const Canvas = ({
   usersInRoom,
   updateUserInCurrentRoom,
 }: CanvasProps) => {
-  const ENDPOINT =
-    process.env.NEXT_PUBLIC_LIVEBOARD_BACKEND_URL || 'http://localhost:5000';
-
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointerContainerRef = useRef(null);
+  // state variables
   const [userPointerCordinates, setUserPointerCordinates] =
     useState<Record<string, { x: number; y: number }>>();
 
+  // references
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   let socketRef = useRef<any>();
+
   const { color, stroke } = useToolSettings();
 
+  const ENDPOINT =
+    process.env.NEXT_PUBLIC_LIVEBOARD_BACKEND_URL || 'http://localhost:5000';
+
   const handleErrors = (msg: string) => {
-    console.log(msg);
+    toast(`⛔ ${msg}`);
   };
 
   const moveCursor = (name: string, x: number, y: number) => {

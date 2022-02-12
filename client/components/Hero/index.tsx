@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import cn from 'classnames';
+import { useRouter } from 'next/dist/client/router';
 
 import {
   CREATE_AND_JOIN_TEXT,
   GLOBAL_JOIN_TEXT,
+  HINT_MESSAGE,
   LIVEBOARD,
 } from 'utils/Strings';
 import styles from './Hero.module.scss';
-import { useRouter } from 'next/dist/client/router';
 import { HeroOption } from 'utils/Interface';
 
 export const Hero = () => {
@@ -37,9 +38,7 @@ export const Hero = () => {
         >
           <div className={styles.label}>{GLOBAL_JOIN_TEXT}</div>
         </div>
-        <div className={styles.footer}>
-          Hint: Your can click on either side to continue
-        </div>
+        <div className={styles.footer}>{HINT_MESSAGE}</div>
       </div>
     </div>
   );
