@@ -1,3 +1,5 @@
+@import '../../../styles/colors';
+
 .canvasContainer {
   flex: 1;
   height: 100%;
@@ -21,8 +23,10 @@
   z-index: -1;
 
   svg {
-    height: 24px;
-    width: 24px;
+    transform: scale(0.8);
+    path {
+      fill: $primary-background-color;
+    }
   }
 
   .pointer {
@@ -36,4 +40,15 @@
     top: 100px;
     z-index: 100;
   }
+}
+
+.userPointer {
+  font-size: 12px;
+  text-transform: uppercase;
+  background-color: #11fc1a;
+  padding: 0 8px;
+  border-radius: 8px;
+  margin-top: 2px;
+  color: $primary-background-color;
+  font-weight: bold;
 }

@@ -5,6 +5,7 @@ import ToolSettingsProvider from 'hooks/context/useToolsSettings';
 import Canvas from './Canvas/Canvas';
 import { Header } from './Header/Header';
 import styles from './Playground.module.scss';
+import SEO from 'components/SEO';
 
 export interface Users {
   id: string;
@@ -34,16 +35,18 @@ export const Playground = ({}) => {
   }
 
   return (
-    <ToolSettingsProvider>
-      <div className={styles.playground} ref={containerRef}>
-        <Header roomName={roomId as string} usersInRoom={usersInRoom} />
-        <Canvas
-          name={username as string}
-          room={roomId as string}
-          usersInRoom={usersInRoom}
-          updateUserInCurrentRoom={updateUserInCurrentRoom}
-        />
-      </div>
-    </ToolSettingsProvider>
+    <SEO title="Playground" description="Lobby where actual magic happens">
+      <ToolSettingsProvider>
+        <div className={styles.playground} ref={containerRef}>
+          <Header roomName={roomId as string} usersInRoom={usersInRoom} />
+          <Canvas
+            name={username as string}
+            room={roomId as string}
+            usersInRoom={usersInRoom}
+            updateUserInCurrentRoom={updateUserInCurrentRoom}
+          />
+        </div>
+      </ToolSettingsProvider>
+    </SEO>
   );
 };

@@ -268,7 +268,7 @@ const Canvas = ({
             }
           >
             <CursorIcon />
-            <div>{user.name}</div>
+            <div className={styles.userPointer}>{user.name}</div>
           </div>
         ))}
       </div>
