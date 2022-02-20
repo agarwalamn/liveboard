@@ -40,7 +40,7 @@ export const Playground = ({}) => {
         <div className={styles.playground} ref={containerRef}>
           <Header roomName={roomId as string} usersInRoom={usersInRoom} />
           <Canvas
-            name={username as string}
+            name={(username as string).trim().toLowerCase()}
             room={roomId as string}
             usersInRoom={usersInRoom}
             updateUserInCurrentRoom={updateUserInCurrentRoom}

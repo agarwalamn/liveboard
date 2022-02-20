@@ -246,31 +246,31 @@ const Canvas = ({
     <div className={styles.canvasContainer}>
       <canvas ref={canvasRef} className="canvas" />
       <div className={styles.pointerContainer}>
-        {usersInRoom.map((user) => (
-          <div
-            key={user.id}
-            className={styles.pointer}
-            style={
-              user.name !== name
-                ? {
-                    top: `${
-                      userPointerCordinates
-                        ? userPointerCordinates[user.name]?.y
-                        : 0
-                    }px`,
-                    left: `${
-                      userPointerCordinates
-                        ? userPointerCordinates[user.name]?.x
-                        : 0
-                    }px`,
-                  }
-                : { display: 'none' }
-            }
-          >
-            <CursorIcon />
-            <div className={styles.userPointer}>{user.name}</div>
-          </div>
-        ))}
+        {usersInRoom.map((user) =>
+          user.name == name ? (
+            <></>
+          ) : (
+            <div
+              key={user.id}
+              className={styles.pointer}
+              style={{
+                top: `${
+                  userPointerCordinates
+                    ? userPointerCordinates[user.name]?.y
+                    : 0
+                }px`,
+                left: `${
+                  userPointerCordinates
+                    ? userPointerCordinates[user.name]?.x
+                    : 0
+                }px`,
+              }}
+            >
+              <CursorIcon />
+              <div className={styles.userPointer}>{user.name}</div>
+            </div>
+          ),
+        )}
       </div>
     </div>
   );
