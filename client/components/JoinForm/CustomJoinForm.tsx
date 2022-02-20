@@ -24,7 +24,11 @@ const CustomJoinForm = () => {
           ? `Invite link for ${inviteRoomCode}`
           : 'Create custom room'
       }
-      description="Create custom liveboard room or join from invite link "
+      description={
+        inviteRoomCode
+          ? `Join ${inviteRoomCode} lobby by clicking this`
+          : 'Create custom liveboard lobby'
+      }
     >
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <div className={styles.inputContainer}>

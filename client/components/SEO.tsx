@@ -2,13 +2,22 @@ import React, { PropsWithChildren } from 'react';
 import Head from 'next/head';
 
 interface SEOProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 }
 
+const DEFAULT_SEO_CONFIG = {
+  title: 'LiveBoard',
+  description: 'live board sharing',
+  site: 'https://live-board.vercel.app',
+  image:
+    'https://raw.githubusercontent.com/agarwalamn/liveboard/main/client/public/logo.png',
+  twitter_handle: '@AgarwalAmn',
+};
+
 export default function SEO({
-  title = 'LiveBoard',
-  description = 'live board sharing',
+  title = DEFAULT_SEO_CONFIG.title,
+  description = DEFAULT_SEO_CONFIG.description,
   children,
 }: PropsWithChildren<SEOProps>) {
   return (
@@ -20,16 +29,35 @@ export default function SEO({
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" key="twcard" />
-        <meta name="twitter:creator" content="@AgarwalAmn" key="twhandle" />
-
-        {/* Open Graph */}
+        <meta name="twitter:site" content={DEFAULT_SEO_CONFIG.site} />
         <meta
-          property="og:url"
-          content="https://live-board.vercel.app"
-          key="ogurl"
+          name="twitter:creator"
+          content={DEFAULT_SEO_CONFIG.twitter_handle}
+          key="twhandle"
         />
-        <meta property="og:image" content="/logo.svg" key="ogimage" />
-        <meta property="og:site_name" content="LiveBoard" key="ogsitename" />
+        <meta name="twitter:title" content={title} key="twtitle" />
+        <meta
+          name="twitter:description"
+          content={description}
+          key="twdescription"
+        />
+        <meta
+          property="twitter:image"
+          content={DEFAULT_SEO_CONFIG.image}
+          key="twimage"
+        />
+        {/* Open Graph */}
+        <meta property="og:url" content={DEFAULT_SEO_CONFIG.site} key="ogurl" />
+        <meta
+          property="og:image"
+          content={DEFAULT_SEO_CONFIG.image}
+          key="ogimage"
+        />
+        <meta
+          property="og:site_name"
+          content={DEFAULT_SEO_CONFIG.title}
+          key="ogsitename"
+        />
         <meta property="og:title" content={title} key="ogtitle" />
         <meta property="og:description" content={description} key="ogdesc" />
       </Head>

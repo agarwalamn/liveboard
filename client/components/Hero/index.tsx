@@ -22,7 +22,7 @@ export const Hero = () => {
   return (
     <SEO
       title="Liveboard"
-      description="Share canvas with your friends to draw unique ideas, powered by web sockets and some tooling "
+      description="Share canvas with your friends to draw unique ideas, powered by web sockets and Tooling options"
     >
       <div className={styles.heroContainer}>
         <div className={styles.optionContainer}>
