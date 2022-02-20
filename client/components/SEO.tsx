@@ -16,17 +16,22 @@ export default function SEO({
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/logo.svg" />
-        <link rel="canonical" href="https://live-board.vercel.app/" />
-        <meta property="og:title" content={title} key="title" />
         <meta name="description" content={description}></meta>
-        <meta name="twitter:title" content="Liveboard" />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:site" content="@AgarwalAmn" />
-        <meta name="twitter:creator" content="@AgarwalAmn"></meta>
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:creator" content="@AgarwalAmn" key="twhandle" />
+
+        {/* Open Graph */}
         <meta
-          name="twitter:image"
-          content="https://twitter.com/AgarwalAmn/photo"
+          property="og:url"
+          content="https://live-board.vercel.app"
+          key="ogurl"
         />
+        <meta property="og:image" content="/logo.svg" key="ogimage" />
+        <meta property="og:site_name" content="LiveBoard" key="ogsitename" />
+        <meta property="og:title" content={title} key="ogtitle" />
+        <meta property="og:description" content={description} key="ogdesc" />
       </Head>
       {children}
     </>
