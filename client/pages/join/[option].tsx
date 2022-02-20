@@ -4,6 +4,7 @@ import { NextRouter, useRouter } from 'next/router';
 
 import { JoinForm } from 'components/JoinForm/JoinForm';
 import { HeroOption } from 'utils/Interface';
+import analytics from 'utils/Analytics';
 
 const Join: NextPage = () => {
   const router = useRouter();
@@ -14,6 +15,12 @@ const Join: NextPage = () => {
   if (router.isFallback) {
     return <div>We are loading page for you</div>;
   }
+
+  analytics.page({
+    title: 'Liveboard',
+    href: `https://live-board.vercel.app/`,
+    path: `/${option}`,
+  });
 
   return <JoinForm variant={option as HeroOption} />;
 };

@@ -3,8 +3,19 @@ import React from 'react';
 import { NextRouter, useRouter } from 'next/router';
 
 import { Playground } from 'components/Playground/Playground';
+import analytics from 'utils/Analytics';
 
 const PlaygroundPage: NextPage = () => {
+  const router = useRouter();
+  const { roomId, username } = router.query;
+
+  analytics.page({
+    title: 'Liveboard',
+    href: `https://live-board.vercel.app/`,
+    roomId,
+    username,
+  });
+
   return <Playground />;
 };
 
