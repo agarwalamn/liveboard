@@ -11,7 +11,7 @@ const DEFAULT_SEO_CONFIG = {
   description: 'live board sharing',
   site: 'https://live-board.vercel.app',
   image:
-    'https://raw.githubusercontent.com/agarwalamn/liveboard/main/client/public/logo.png',
+    'https://github.com/agarwalamn/liveboard/blob/main/client/public/logo_square.png',
   twitter_handle: '@AgarwalAmn',
 };
 
