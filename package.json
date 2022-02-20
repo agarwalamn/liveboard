@@ -6,12 +6,9 @@
   "scripts": {
     "install-client": "npm install --prefix client",
     "install-server": "npm install --prefix server",
-    "server": "npm run server --prefix server",
+    "server": "npm run start --prefix server",
     "client": "npm start --prefix client",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "heroku-prebuild": "cd server && npm install"
   },
   "repository": {
     "type": "git",
