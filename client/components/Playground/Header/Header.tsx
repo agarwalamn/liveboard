@@ -32,7 +32,7 @@ export const Header = ({ roomName, usersInRoom }: HeaderProps) => {
       <div className={styles.subOptions}>
         <UsersBadges users={usersInRoom.map((user) => user.name)} />
         <a
-          href="https://github.com/agarwalamn/liveboard_rebooted"
+          href="https://github.com/agarwalamn/liveboard"
           target="_blank"
           rel="noreferrer"
         >
